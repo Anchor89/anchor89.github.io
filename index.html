@@ -80,7 +80,7 @@ $("#reg-form button").click(function(e){
     data[$(ele).attr("name")] = $(ele).val();
   });
   console.log(data);
-  data.save(null,{
+  data.save(data,{
   success: function() {
     console.log("reg-succeed");
     $("#reg-succeed").show();
