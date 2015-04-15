@@ -104,7 +104,7 @@ $("#reg-form button").click(function(e){
     return;
   }
   var register = new FbRegister();
-  var data = {"uuid": uuid};
+  var data = {"uuid": uuid, "timestamp": (new Date()).getTime()};
   data.uuid = uuid;
   $("#reg-form input").each(function(i, ele) {
     data[$(ele).attr("name")] = $(ele).val();
