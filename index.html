@@ -75,6 +75,7 @@ $("#reg-failed").hide();
 $("#reg-form .form-group input [name]").blur(function() {
   var name = $(this).attr("name");
   var val = $(this).val();
+  console.log(name + ":" + val);
   var phonePattern = new RegExp("\\d{11}");
   var emailPattern = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$", "i")
   var validator = {
@@ -87,13 +88,14 @@ $("#reg-form .form-group input [name]").blur(function() {
     "email": function(val) {
       return emailPattern.test(val);
     }
-  }
+  };
+
   if (validator[name](val)) {
     $(this).parent('div.form-group').removeClass('has-error');
   } else {
     $(this).parent('div.form-group').addClass('has-error');
   }
-};
+});
 
 // Click submit button
 $("#reg-form button").click(function(e){
