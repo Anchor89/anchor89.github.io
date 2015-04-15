@@ -68,13 +68,13 @@ console.log(uuid);
 
 // Init
 AV.initialize("8qfgt0oqsl5w5910kt82qmj5axb75t8u0bfnbfshhrrcqdem", "e12vqkura15jxzt0vcwj2cp9utw3li8aihmvbjx1cwgl9j47");
-var User = AV.Object.extend("User");
+var FbRegister = AV.Object.extend("FbRegister");
 $("#reg-succeed").hide();
 $("#reg-failed").hide();
 
 // Bindings
 $("#reg-form button").click(function(e){
-  var data = User();
+  var data = FbRegister();
   data.uuid = uuid;
   $("#reg-form input").each(function(i, ele) {
     data[$(ele).attr("name")] = $(ele).val();
