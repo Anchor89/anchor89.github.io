@@ -38,15 +38,15 @@
 
     <div class="form-group">
       <label>姓名</label>
-      <input type="text" class="form-control" placeholder="" name="name">
+      <input type="text" class="form-control" placeholder="张三" name="name">
     </div>
     <div class="form-group">
       <label>手机</label>
-      <input type="text" class="form-control" placeholder="" name="phone">
+      <input type="text" class="form-control" placeholder="11位手机号" name="phone">
     </div>
     <div class="form-group">
       <label>邮箱</label>
-      <input type="text" class="form-control" placeholder="" name="email">
+      <input type="text" class="form-control" placeholder="user@example.com" name="email">
     </div>
     <button type="button" class="btn btn-default" placeholder="" name="submit">注册</button>
   </form>
@@ -55,7 +55,6 @@
 <script>
 $(document).ready(function() {
 // Lib
-
 function UUID() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -65,8 +64,6 @@ function UUID() {
 
 uuid = UUID();
 
-console.log(uuid);
-
 // Init
 AV.initialize("8qfgt0oqsl5w5910kt82qmj5axb75t8u0bfnbfshhrrcqdem", "e12vqkura15jxzt0vcwj2cp9utw3li8aihmvbjx1cwgl9j47");
 var FbRegister = AV.Object.extend("FbRegister");
@@ -74,9 +71,37 @@ $("#reg-succeed").hide();
 $("#reg-failed").hide();
 
 // Bindings
+// Blur
+$("#reg-form .form-group input [name]").blur(function() {
+  var name = $(this).attr("name");
+  var val = $(this).val();
+  var phonePattern = new RegExp("\\d{11}");
+  var emailPattern = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$", "i")
+  var validator = {
+    "name": function(val) {
+      return true;
+    },
+    "phone": function(val) {
+      return phonePattern.test(val);
+    },
+    "email": function(val) {
+      return emailPattern.test(val);
+    }
+  }
+  if (validator[name](val)) {
+    $(this).parent('div.form-group').removeClass('has-error');
+  } else {
+    $(this).parent('div.form-group').addClass('has-error');
+  }
+};
+
+// Click submit button
 $("#reg-form button").click(function(e){
+  if ($('.has-error').length > 0) {
+    alert('请修正错误信息。');
+  }
   var register = new FbRegister();
-  var data = {}
+  var data = {"uuid": uuid};
   data.uuid = uuid;
   $("#reg-form input").each(function(i, ele) {
     data[$(ele).attr("name")] = $(ele).val();
