@@ -69,6 +69,8 @@ console.log(uuid);
 // Init
 AV.initialize("8qfgt0oqsl5w5910kt82qmj5axb75t8u0bfnbfshhrrcqdem", "e12vqkura15jxzt0vcwj2cp9utw3li8aihmvbjx1cwgl9j47");
 var User = AV.Object.extend("User");
+$("#reg-succeed").hide();
+$("#reg-failed").hide();
 
 // Bindings
 $("#reg-form button").click(function(e){
@@ -82,9 +84,11 @@ $("#reg-form button").click(function(e){
   success: function() {
     console.log("reg-succeed");
     $("#reg-succeed").show();
+    $("#reg-failed").hide();
   },
   error: function() {
         console.log("reg-failed");
+    $("#reg-succeed").hide();
     $("#reg-failed").show();
   }
   });
