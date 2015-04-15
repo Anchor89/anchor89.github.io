@@ -16,7 +16,7 @@
   <nav class="navbar navbar-default">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-	<img class="img-responsive img-rounded" height="25px" src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Facebook.svg/266px-Facebook.svg.png"></img>
+	<img class="img-responsive img-rounded" style="height:25px" src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Facebook.svg/266px-Facebook.svg.png"></img>
       </a>
       <a class="navbar-brand" href="#">
 	欢迎注册Facebook中科院交流会！
@@ -27,25 +27,36 @@
   <form id="reg-form">
     <div class="form-group">
       <label>姓名</label>
-      <input type="text" class="form-control" placeholder="">
+      <input type="text" class="form-control" placeholder="" name="name">
     </div>
     <div class="form-group">
       <label>手机</label>
-      <input type="text" class="form-control" placeholder="">
+      <input type="text" class="form-control" placeholder="" name="phone">
     </div>
     <div class="form-group">
       <label>邮箱</label>
-      <input type="text" class="form-control" placeholder="">
+      <input type="text" class="form-control" placeholder="" name="email">
     </div>
-    <button type="button" class="btn btn-default" placeholder="">注册</button>
+    <button type="button" class="btn btn-default" placeholder="" name="submit">注册</button>
   </form>
 </div>
 </body>
 <script>
-$("#reg-form").submit(function(e){
-console.log("submit");
-e.preventDefault();
+$(document).ready(function() {
+// Init
+AV.initialize("8qfgt0oqsl5w5910kt82qmj5axb75t8u0bfnbfshhrrcqdem", "e12vqkura15jxzt0vcwj2cp9utw3li8aihmvbjx1cwgl9j47");
+var User = AV.Object.extend("User");
+
+// Bindings
+$("#reg-form button").submit(function(e){
+var data={};
+$("#reg-form input").each(function(ele) {
+data[$(ele).attr("name")] = $(ele).val();
 });
+console(data);
+});
+});
+
 </script>
 </html>
 
