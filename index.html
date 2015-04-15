@@ -14,15 +14,14 @@
 <body>
 <div class="container">
   <nav class="navbar navbar-default">
-      <div class="navbar-header">
-	<a class="navbar-brand" href="#">
-	  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Facebook.svg/266px-Facebook.svg.png"></img>欢迎注册Facebook中科院交流会！
-	</a>
-      </div>
-  </div>
-
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+	<img class="img-responsive" src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Facebook.svg/266px-Facebook.svg.png"></img>欢迎注册Facebook中科院交流会！
+      </a>
+    </div>
   </nav>
-  <form>
+
+  <form id="reg-form">
     <div class="form-group">
       <label>姓名</label>
       <input type="text" class="form-control" placeholder="">
@@ -35,13 +34,15 @@
       <label>邮箱</label>
       <input type="text" class="form-control" placeholder="">
     </div>
-    <div class="form-group">
-      <input type="button" class="form-control" placeholder="">注册</input>
-    </div>    
+    <button type="button" class="btn btn-default" placeholder="">注册</button>
   </form>
 </div>
 </body>
 <script>
+$("#reg-form").submit(function(e){
+console.log("submit");
+e.preventDefault();
+});
 </script>
 </html>
 
