@@ -101,6 +101,7 @@ $("#reg-form .form-group input[name]").blur(function() {
 $("#reg-form button").click(function(e){
   if ($('.has-error').length > 0) {
     alert('请修正错误信息。');
+    return;
   }
   var register = new FbRegister();
   var data = {"uuid": uuid};
