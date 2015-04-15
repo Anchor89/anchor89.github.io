@@ -75,13 +75,14 @@ $("#reg-failed").hide();
 
 // Bindings
 $("#reg-form button").click(function(e){
-  var data = new FbRegister();
+  var register = new FbRegister();
+  var data = {}
   data.uuid = uuid;
   $("#reg-form input").each(function(i, ele) {
     data[$(ele).attr("name")] = $(ele).val();
   });
   console.log(data);
-  data.save(data,{
+  register.save(data,{
   success: function() {
     console.log("reg-succeed");
     $("#reg-succeed").show();
