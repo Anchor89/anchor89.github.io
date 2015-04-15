@@ -25,6 +25,16 @@
   </nav>
 
   <form id="reg-form">
+    <div class="alert alert-success alert-dismissible" role="alert" id="reg-succeed">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Warning!</strong> Better check yourself, you're not looking too good.
+    </div>
+
+    <div class="alert alert-danger alert-dismissible" role="alert" id="reg-failed">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Warning!</strong> Better check yourself, you're not looking too good.
+    </div>
+
     <div class="form-group">
       <label>姓名</label>
       <input type="text" class="form-control" placeholder="" name="name">
@@ -43,20 +53,44 @@
 </body>
 <script>
 $(document).ready(function() {
+// Lib
+
+function UUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    return v.toString(16);
+  });
+}
+
+uuid = UUID();
+
+console.log(uuid);
+
 // Init
 AV.initialize("8qfgt0oqsl5w5910kt82qmj5axb75t8u0bfnbfshhrrcqdem", "e12vqkura15jxzt0vcwj2cp9utw3li8aihmvbjx1cwgl9j47");
 var User = AV.Object.extend("User");
 
 // Bindings
-$("#reg-form button").submit(function(e){
-var data={};
-$("#reg-form input").each(function(ele) {
-data[$(ele).attr("name")] = $(ele).val();
-});
-console(data);
-});
+$("#reg-form button").click(function(e){
+  var data = User();
+  data.uuid = uuid;
+  $("#reg-form input").each(function(i, ele) {
+    data[$(ele).attr("name")] = $(ele).val();
+  });
+  console.log(data);
+  data.save(null,{
+  success: function() {
+    console.log("reg-succeed");
+    $("#reg-succeed").show();
+  }
+  error: function() {
+        console.log("reg-failed");
+    $("#reg-failed").show();
+  }
+  });
 });
 
+});
 </script>
 </html>
 
