@@ -80,7 +80,7 @@ $("#reg-form .form-group input[name]").blur(function() {
   var emailPattern = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$", "i")
   var validator = {
     "name": function(val) {
-      return true;
+      return val != "";
     },
     "phone": function(val) {
       return phonePattern.test(val);
